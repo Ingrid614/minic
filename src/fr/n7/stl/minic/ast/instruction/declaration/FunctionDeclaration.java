@@ -11,6 +11,7 @@ import fr.n7.stl.minic.ast.SemanticsUndefinedException;
 import fr.n7.stl.minic.ast.instruction.Instruction;
 import fr.n7.stl.minic.ast.scope.Declaration;
 import fr.n7.stl.minic.ast.scope.HierarchicalScope;
+import fr.n7.stl.minic.ast.scope.SymbolTable;
 import fr.n7.stl.minic.ast.type.Type;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.Register;
@@ -101,10 +102,27 @@ public class FunctionDeclaration implements DeclarationInstruction {
 	 */
 	@Override
 	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope) {
-		if(_scope.accepts(this)){
+		if (_scope.accepts(this)) {
 			_scope.register(this);
-			return this.body.collectAndPartialResolve(_scope);
-		}else{
+
+			HierarchicalScope<Declaration> local = new SymbolTable(_scope);
+
+			boolean result = true;
+
+			for (ParameterDeclaration p : this.parameters) {
+				if (local.accepts(p)) {
+					local.register(p);
+				} else {
+					Logger.error("Parameter " + p.getName() + " already defined");
+					result = false;
+				}
+			}
+
+			result = result && this.body.collectAndPartialResolve(local, this);
+
+			return result;
+
+		} else {
 			Logger.error("Function : " + this.name + " is already defined");
 			return false;
 		}
@@ -113,7 +131,30 @@ public class FunctionDeclaration implements DeclarationInstruction {
 	
 	@Override
 	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope, FunctionDeclaration _container) {
-		return this.collectAndPartialResolve(_scope);
+		if (_scope.accepts(this)) {
+			_scope.register(this);
+
+			HierarchicalScope<Declaration> local = new SymbolTable(_scope);
+
+			boolean result = true;
+
+			for (ParameterDeclaration p : this.parameters) {
+				if (local.accepts(p)) {
+					local.register(p);
+				} else {
+					Logger.error("Parameter " + p.getName() + " already defined");
+					result = false;
+				}
+			}
+
+			result = result && this.body.collectAndPartialResolve(local, this);
+
+			return result;
+
+		} else {
+			Logger.error("Function : " + this.name + " is already defined");
+			return false;
+		}
 		//throw new SemanticsUndefinedException( "Semantics collectAndPartialResolve is undefined in ConstantDeclaration.");
 
 	}
@@ -135,7 +176,7 @@ public class FunctionDeclaration implements DeclarationInstruction {
 	 */
 	@Override
 	public boolean checkType() {
-		throw new SemanticsUndefinedException( "Semantics checkType is undefined in FunctionDeclaration.");
+		return this.body.checkType();
 	}
 
 	/* (non-Javadoc)

@@ -166,6 +166,21 @@ public class ASTBuilder extends MiniCParserBaseListener {
         }
         ctx.uneInstruction = new Conditional(ctx.expression().uneExpression, ctx.alors.unBloc, elseBlock);
     }
+    @Override
+    public void exitInstructionSi(InstructionSiContext ctx) {
+        ctx.uneInstruction = new Conditional(
+            ctx.expression().uneExpression,
+            ctx.alors.unBloc
+        );
+    }
+
+    @Override
+    public void exitInstructionTantque(InstructionTantqueContext ctx) {
+        ctx.uneInstruction = new Iteration(
+            ctx.expression().uneExpression,
+            ctx.alors.unBloc
+        );
+    }
 
     @Override
     public void exitInstructionReturn(InstructionReturnContext ctx) {

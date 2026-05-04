@@ -10,9 +10,11 @@ import fr.n7.stl.minic.ast.expression.Expression;
 import fr.n7.stl.minic.ast.scope.Declaration;
 import fr.n7.stl.minic.ast.instruction.declaration.FunctionDeclaration;
 import fr.n7.stl.minic.ast.scope.HierarchicalScope;
+import fr.n7.stl.minic.ast.type.Type;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.Register;
 import fr.n7.stl.tam.ast.TAMFactory;
+import fr.n7.stl.util.Logger;
 
 /**
  * Implementation of the Abstract Syntax Tree node for a return instruction.
@@ -43,7 +45,7 @@ public class Return implements Instruction {
 	 */
 	@Override
 	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException( "Semantics collect is undefined in Return.");
+		return this.value.collectAndPartialResolve(_scope);
 	}
 	
 	/* (non-Javadoc)
@@ -51,7 +53,7 @@ public class Return implements Instruction {
 	 */
 	@Override
 	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException( "Semantics resolve is undefined in Return.");
+		return this.value.completeResolve(_scope);
 	}
 	
 	@Override
@@ -69,7 +71,17 @@ public class Return implements Instruction {
 	 */
 	@Override
 	public boolean checkType() {
-		throw new SemanticsUndefinedException("Semantics checkType undefined in Return.");
+		if (function == null ){
+			Logger.warning("Return should be used within a function!");
+			return false;
+		}
+		Type funcType = this.function.getType();
+		Type valueType = this.value.getType();
+		if(!valueType.compatibleWith(funcType)){
+			Logger.error("Type mismatch error : "+valueType+" instead of "+funcType);
+			return false;
+		}
+		return true;
 	}
 
 	/* (non-Javadoc)
@@ -77,7 +89,7 @@ public class Return implements Instruction {
 	 */
 	@Override
 	public int allocateMemory(Register _register, int _offset) {
-		throw new SemanticsUndefinedException("Semantics allocateMemory undefined in Return.");
+		return 0;
 	}
 
 	/* (non-Javadoc)

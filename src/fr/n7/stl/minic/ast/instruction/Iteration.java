@@ -70,7 +70,7 @@ public class Iteration implements Instruction {
 	 */
 	@Override
 	public boolean checkType() {
-		if(!this.condition.getType().equalsTo(AtomicType.BooleanType)){
+		if(!this.condition.getType().compatibleWith(AtomicType.BooleanType)){
 			Logger.error("Type error : condition must be boolean : " + condition.getType() + " instead of boolean");
 			return false;
 		}

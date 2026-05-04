@@ -1,21 +1,19 @@
-
-
-void main() {
-
-    int i = 0;
-    int j = i;
-    if(i){
-        j = i;
-    }
-    const int k = 0;
-    i = 3;
-    
-    
-    while(i == 0){
-        i = i+1;
-    }
-}
 void function(int s, int t){
     int k = s + t;
     return s;
 }
+void main() {
+    int i = 0;
+    int j = i;
+    if(i == 0){
+        j = i;
+    }
+    const int ki = 0;
+    i = 3;
+    while(i > 0){
+        i = i+1;
+    }
+    print "hello";
+}
+
+
