@@ -5,11 +5,13 @@ package fr.n7.stl.minic.ast.expression.assignable;
 
 import fr.n7.stl.minic.ast.SemanticsUndefinedException;
 import fr.n7.stl.minic.ast.expression.AbstractIdentifier;
+import fr.n7.stl.minic.ast.instruction.declaration.ParameterDeclaration;
 import fr.n7.stl.minic.ast.instruction.declaration.VariableDeclaration;
 import fr.n7.stl.minic.ast.scope.Declaration;
 import fr.n7.stl.minic.ast.scope.HierarchicalScope;
 import fr.n7.stl.minic.ast.type.Type;
 import fr.n7.stl.tam.ast.Fragment;
+import fr.n7.stl.tam.ast.Register;
 import fr.n7.stl.tam.ast.TAMFactory;
 import fr.n7.stl.util.Logger;
 
@@ -39,6 +41,11 @@ public class VariableAssignment extends AbstractIdentifier implements Assignable
 			Declaration _declaration = _scope.get(this.name);
 			if (_declaration instanceof VariableDeclaration) {
 				this.declaration = ((VariableDeclaration) _declaration);
+				return true;
+			}else if (_declaration instanceof ParameterDeclaration) {
+				ParameterDeclaration pardecl = (ParameterDeclaration) _declaration;
+				this.declaration = new VariableDeclaration(pardecl.getName(), pardecl.getType(), null);
+				declaration.allocateMemory(Register.LB, pardecl.getOffset());
 				return true;
 			} else {
 				Logger.error("The declaration for " + this.name + " is of the wrong kind.");

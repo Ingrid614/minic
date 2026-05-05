@@ -39,7 +39,7 @@ public abstract class AbstractPointer<PointerKind extends Expression> implements
 	 */
 	@Override
 	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException("Semantics collect is not implemented in AbstractPointer.");		
+		return this.pointer.collectAndPartialResolve(_scope);
 	}
 	
 	/* (non-Javadoc)
@@ -47,7 +47,7 @@ public abstract class AbstractPointer<PointerKind extends Expression> implements
 	 */
 	@Override
 	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException("Semantics resolve is not implemented in AbstractPointer.");		
+		return this.pointer.completeResolve(_scope);
 	}
 
 	/**
@@ -55,7 +55,7 @@ public abstract class AbstractPointer<PointerKind extends Expression> implements
 	 * @return Synthesized Type of the expression.
 	 */
 	public Type getType() {
-		throw new SemanticsUndefinedException("Semantics getType is not implemented in PointerAccess.");
+		return this.pointer.getType();
 	}
 
 }

@@ -47,7 +47,7 @@ public abstract class AbstractArray<ArrayKind extends Expression> implements Exp
 	 */
 	@Override
 	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException( "collect is undefined in Abstract Array.");
+		return this.array.collectAndPartialResolve(_scope);
 	}
 
 	/* (non-Javadoc)
@@ -55,7 +55,7 @@ public abstract class AbstractArray<ArrayKind extends Expression> implements Exp
 	 */
 	@Override
 	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException( "resolve is undefined in Abstract Array.");
+		return this.array.completeResolve(_scope);
 	}
 	
 	/**
@@ -63,7 +63,7 @@ public abstract class AbstractArray<ArrayKind extends Expression> implements Exp
 	 * @return Synthesized Type of the expression.
 	 */
 	public Type getType() {
-		throw new SemanticsUndefinedException( "getType is undefined in AbstractArray.");
+		return this.array.getType();
 	}
 
 }

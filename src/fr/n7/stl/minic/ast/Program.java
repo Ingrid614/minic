@@ -116,8 +116,13 @@ public class Program {
 	 * @param _register Inherited Register associated to the address of the variables.
 	 * @param _offset Inherited Current offset for the address of the variables.
 	 */	
+
 	public void allocateMemory(Register _register, int _offset) {
-		throw new SemanticsUndefinedException("Semantics allocateMemory is undefined in Program.");
+		int length = 0;
+		for(DeclarationInstruction inst: this.declarations){
+			length += inst.allocateMemory(_register,length + _offset);
+		}
+		this.main.allocateMemory(_register, length + _offset);
 	}
 
 	/**

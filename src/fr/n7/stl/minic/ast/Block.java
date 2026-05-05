@@ -78,10 +78,10 @@ public class Block {
 	 */
 	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope, FunctionDeclaration _container) {
 		boolean ok = true;
-            for (Instruction instruction : this.instructions) {
-                ok &= instruction.collectAndPartialResolve(_scope);
-            }
-            return ok;
+        for (Instruction instruction : this.instructions) {
+            ok &= instruction.collectAndPartialResolve(_scope,_container);
+        }
+        return ok;
 	}
 	
 	/**

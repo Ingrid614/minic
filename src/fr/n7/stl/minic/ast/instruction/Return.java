@@ -60,10 +60,8 @@ public class Return implements Instruction {
 	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope, FunctionDeclaration _container) {
 		if (this.function == null) {
 			this.function = _container;		
-		} else {
-			throw new InvalidParameterException("Trying to set a function declaration to a return instruction when one has already been set.");
 		}
-		return this.collectAndPartialResolve(_scope);
+		return this.value.collectAndPartialResolve(_scope);
 	}
 
 	/* (non-Javadoc)

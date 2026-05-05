@@ -7,9 +7,12 @@ import fr.n7.stl.minic.ast.SemanticsUndefinedException;
 import fr.n7.stl.minic.ast.expression.accessible.AccessibleExpression;
 import fr.n7.stl.minic.ast.scope.Declaration;
 import fr.n7.stl.minic.ast.scope.HierarchicalScope;
+import fr.n7.stl.minic.ast.type.AtomicType;
+import fr.n7.stl.minic.ast.type.CoupleType;
 import fr.n7.stl.minic.ast.type.Type;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.TAMFactory;
+import fr.n7.stl.util.Logger;
 
 /**
  * Abstract Syntax Tree node for an expression extracting the first component in a couple.
@@ -43,7 +46,7 @@ public class First implements AccessibleExpression {
 	 */
 	@Override
 	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException("Semantics collect undefined in First.");
+		return this.target.collectAndPartialResolve(_scope);	
 	}
 
 	/* (non-Javadoc)
@@ -51,7 +54,7 @@ public class First implements AccessibleExpression {
 	 */
 	@Override
 	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException("Semantics resolve undefined in First.");
+		return this.target.completeResolve(_scope);
 	}
 	
 	/* (non-Javadoc)
@@ -59,7 +62,13 @@ public class First implements AccessibleExpression {
 	 */
 	@Override
 	public Type getType() {
-		throw new SemanticsUndefinedException("Semantics getType undefined in First.");
+		Type type = this.target.getType();
+		if(type instanceof CoupleType){
+			return ((CoupleType) target.getType()).getFirst();
+		}else{
+			Logger.error("First applied to a non couple type "+ type);
+			return AtomicType.ErrorType;
+		}
 	}
 
 	/* (non-Javadoc)

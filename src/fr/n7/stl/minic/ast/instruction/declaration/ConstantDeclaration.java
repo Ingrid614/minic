@@ -121,7 +121,7 @@ public class ConstantDeclaration implements DeclarationInstruction {
 		}
 		Type valueType = this.value.getType();
 		if(!(this.type.compatibleWith(valueType))){
-			Logger.error("Type mismatch : cannot convert "+this.type+" to "+valueType);
+			Logger.error("Type mismatch : cannot convert " + this.type + " to "+valueType);
 			return false;
 		}
 		return true;
@@ -133,7 +133,7 @@ public class ConstantDeclaration implements DeclarationInstruction {
 	 */
 	@Override
 	public int allocateMemory(Register _register, int _offset) {
-		throw new SemanticsUndefinedException( "Semantics allocateMemory is undefined in ConstantDeclaration.");
+		return this.type.length();
 	}
 
 	/* (non-Javadoc)

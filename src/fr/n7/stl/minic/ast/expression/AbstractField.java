@@ -3,8 +3,11 @@ package fr.n7.stl.minic.ast.expression;
 import fr.n7.stl.minic.ast.SemanticsUndefinedException;
 import fr.n7.stl.minic.ast.scope.Declaration;
 import fr.n7.stl.minic.ast.scope.HierarchicalScope;
+import fr.n7.stl.minic.ast.type.NamedType;
+import fr.n7.stl.minic.ast.type.RecordType;
 import fr.n7.stl.minic.ast.type.Type;
 import fr.n7.stl.minic.ast.type.declaration.FieldDeclaration;
+import fr.n7.stl.util.Logger;
 
 /**
  * Common elements between left (Assignable) and right (Expression) end sides of assignments. These elements
@@ -41,7 +44,8 @@ public abstract class AbstractField<RecordKind extends Expression> implements Ex
 	 */
 	@Override
 	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException( "collect is undefined in AbstractField.");
+		return this.record.collectAndPartialResolve(_scope);
+		// throw new SemanticsUndefinedException( "collect is undefined in AbstractField.");
 	}
 
 	/* (non-Javadoc)
@@ -49,15 +53,42 @@ public abstract class AbstractField<RecordKind extends Expression> implements Ex
 	 */
 	@Override
 	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException( "resolve is undefined in AbstractField.");
-	}
+		boolean ok = this.record.completeResolve(_scope);
 
+		Type recordType = this.record.getType();
+
+		// Résolution des NamedType
+		if (recordType instanceof NamedType) {
+			recordType.completeResolve(_scope);
+			recordType = ((NamedType) recordType).getType();
+		}
+
+		// Vérifier que c'est un record
+		if (!(recordType instanceof RecordType)) {
+			Logger.error("Field access on non-record type: " + recordType);
+			return false;
+		}
+
+		RecordType record = (RecordType) recordType;
+
+		// Chercher le champ
+		FieldDeclaration fieldDecl = record.get(this.name);
+
+		if (fieldDecl == null) {
+			Logger.error("Field " + this.name + " does not exist in " + record);
+			return false;
+		}
+
+		this.field = fieldDecl;
+
+		return ok;
+	}
 	/**
 	 * Synthesized Semantics attribute to compute the type of an expression.
 	 * @return Synthesized Type of the expression.
 	 */
 	public Type getType() {
-		throw new SemanticsUndefinedException( "getType is undefined in FieldAccess.");
+		return this.field.getType();
 	}
 
 }

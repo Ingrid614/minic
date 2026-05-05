@@ -6,6 +6,7 @@ package fr.n7.stl.minic.ast.expression.accessible;
 import fr.n7.stl.minic.ast.expression.AbstractIdentifier;
 import fr.n7.stl.minic.ast.expression.AbstractAccess;
 import fr.n7.stl.minic.ast.instruction.declaration.ConstantDeclaration;
+import fr.n7.stl.minic.ast.instruction.declaration.ParameterDeclaration;
 import fr.n7.stl.minic.ast.instruction.declaration.VariableDeclaration;
 import fr.n7.stl.minic.ast.scope.Declaration;
 import fr.n7.stl.minic.ast.scope.HierarchicalScope;
@@ -47,23 +48,27 @@ public class IdentifierAccess extends AbstractIdentifier implements AccessibleEx
 	 */
 	@Override
 	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope) {
-		if (((HierarchicalScope<Declaration>)_scope).knows(this.name)) {
+		if ((_scope).knows(this.name)) {
 			Declaration _declaration = _scope.get(this.name);
 			if (_declaration instanceof VariableDeclaration) {
 				this.expression = new VariableAccess((VariableDeclaration) _declaration);
-				return true;
 			} else {
 				if (_declaration instanceof ConstantDeclaration) {
-					// TODO : refactor the management of Constants
 					this.expression = new ConstantAccess((ConstantDeclaration) _declaration);
-					return true;
-				} else {
-					return false;
+				}
+				else {
+					if (_declaration instanceof ParameterDeclaration) {
+						this.expression = new ParameterAccess((ParameterDeclaration) _declaration);
+					}
+					else {
+						Logger.warning("Identifier not found");
+
+						return false;
+					}
 				}
 			}
-		} else {
-			return false;
 		}
+		return true;
 	}
 	
 	/* (non-Javadoc)
@@ -75,11 +80,10 @@ public class IdentifierAccess extends AbstractIdentifier implements AccessibleEx
 			if (((HierarchicalScope<Declaration>)_scope).knows(this.name)) {
 				Declaration _declaration = _scope.get(this.name);
 				if (_declaration instanceof ConstantDeclaration) {
-					// TODO : refactor the management of Constants
 					this.expression = new ConstantAccess((ConstantDeclaration) _declaration);
 					return true;
 				} else {
-					Logger.error("The declaration for " + this.name + " is of the wrong kind or is declared after its use.");
+					Logger.error("The declaration for " + this.name + " is of the wrong kind.");
 					return false;
 				}
 			} else {

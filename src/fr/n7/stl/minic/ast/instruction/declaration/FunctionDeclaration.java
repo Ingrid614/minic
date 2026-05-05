@@ -50,6 +50,7 @@ public class FunctionDeclaration implements DeclarationInstruction {
 	 * AST node for the body of the function
 	 */
 	protected Block body;
+	protected HierarchicalScope<Declaration> local;
 
 	/**
 	 * Builds an AST node for a function declaration
@@ -105,13 +106,13 @@ public class FunctionDeclaration implements DeclarationInstruction {
 		if (_scope.accepts(this)) {
 			_scope.register(this);
 
-			HierarchicalScope<Declaration> local = new SymbolTable(_scope);
+			this.local = new SymbolTable(_scope);
 
 			boolean result = true;
 
 			for (ParameterDeclaration p : this.parameters) {
-				if (local.accepts(p)) {
-					local.register(p);
+				if (this.local.accepts(p)) {
+					this.local.register(p);
 				} else {
 					Logger.error("Parameter " + p.getName() + " already defined");
 					result = false;
@@ -128,35 +129,26 @@ public class FunctionDeclaration implements DeclarationInstruction {
 		}
 		//throw new SemanticsUndefinedException( "Semantics collectAndPartialResolve is undefined in FunctionDeclaration.");
 	}
-	
+		
 	@Override
 	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope, FunctionDeclaration _container) {
-		if (_scope.accepts(this)) {
-			_scope.register(this);
 
-			HierarchicalScope<Declaration> local = new SymbolTable(_scope);
+		this.local = new SymbolTable(_scope);
 
-			boolean result = true;
+		boolean result = true;
 
-			for (ParameterDeclaration p : this.parameters) {
-				if (local.accepts(p)) {
-					local.register(p);
-				} else {
-					Logger.error("Parameter " + p.getName() + " already defined");
-					result = false;
-				}
+		for (ParameterDeclaration p : this.parameters) {
+			if (local.accepts(p)) {
+				local.register(p);
+			} else {
+				Logger.error("Parameter " + p.getName() + " already defined");
+				result = false;
 			}
-
-			result = result && this.body.collectAndPartialResolve(local, this);
-
-			return result;
-
-		} else {
-			Logger.error("Function : " + this.name + " is already defined");
-			return false;
 		}
-		//throw new SemanticsUndefinedException( "Semantics collectAndPartialResolve is undefined in ConstantDeclaration.");
 
+		result &= this.body.collectAndPartialResolve(local, this);
+
+		return result;
 	}
 	
 	/* (non-Javadoc)
@@ -184,7 +176,7 @@ public class FunctionDeclaration implements DeclarationInstruction {
 	 */
 	@Override
 	public int allocateMemory(Register _register, int _offset) {
-		throw new SemanticsUndefinedException( "Semantics allocateMemory is undefined in FunctionDeclaration.");
+		return this.body.allocateMemory(_register, _offset);
 	}
 
 	/* (non-Javadoc)

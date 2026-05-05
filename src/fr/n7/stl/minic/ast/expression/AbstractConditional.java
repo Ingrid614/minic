@@ -6,6 +6,7 @@ package fr.n7.stl.minic.ast.expression;
 import fr.n7.stl.minic.ast.SemanticsUndefinedException;
 import fr.n7.stl.minic.ast.scope.Declaration;
 import fr.n7.stl.minic.ast.scope.HierarchicalScope;
+import fr.n7.stl.minic.ast.type.AtomicType;
 import fr.n7.stl.minic.ast.type.Type;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.TAMFactory;
@@ -50,7 +51,11 @@ public class AbstractConditional<ExpressionKind extends Expression> implements E
 	 */
 	@Override
 	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException( "Semantics collect is undefined in ConditionalExpression.");
+		boolean ok = true;
+		ok &= this.condition.collectAndPartialResolve(_scope);
+		ok &= this.thenExpression.collectAndPartialResolve(_scope);
+		ok &= this.elseExpression.collectAndPartialResolve(_scope);
+		return ok;
 	}
 
 	/* (non-Javadoc)
@@ -58,7 +63,11 @@ public class AbstractConditional<ExpressionKind extends Expression> implements E
 	 */
 	@Override
 	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException( "Semantics resolve is undefined in ConditionalExpression.");
+		boolean ok = true;
+		ok &= this.condition.completeResolve(_scope);
+		ok &= this.thenExpression.completeResolve(_scope);
+		ok &= this.elseExpression.completeResolve(_scope);
+		return ok;
 	}
 
 	/* (non-Javadoc)
@@ -74,7 +83,12 @@ public class AbstractConditional<ExpressionKind extends Expression> implements E
 	 */
 	@Override
 	public Type getType() {
-		throw new SemanticsUndefinedException( "Semantics getType is undefined in ConditionalExpression.");
+		if (this.thenExpression.getType().compatibleWith(this.elseExpression.getType())) {
+			return this.thenExpression.getType();
+		} else {
+			return AtomicType.ErrorType; // ou null selon ton projet
+		}
+		// throw new SemanticsUndefinedException( "Semantics getType is undefined in ConditionalExpression.");
 	}
 
 	/* (non-Javadoc)
