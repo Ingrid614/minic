@@ -9,6 +9,8 @@ import fr.n7.stl.minic.ast.instruction.declaration.ParameterDeclaration;
 import fr.n7.stl.minic.ast.scope.Declaration;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.TAMFactory;
+import fr.n7.stl.tam.ast.Register;
+
 
 /**
  * Implementation of the Abstract Syntax Tree node for a variable access expression.
@@ -37,7 +39,11 @@ public class ParameterAccess extends AbstractAccess {
 	 * @see fr.n7.stl.block.ast.expression.AbstractUse#getCode(fr.n7.stl.tam.ast.TAMFactory)
 	 */
 	public Fragment getCode(TAMFactory _factory) {
-		throw new SemanticsUndefinedException( "Semantics getCode is undefined in ParameterUse.");
+		Fragment f = _factory.createFragment();
+
+		f.add(_factory.createLoad(Register.LB, declaration.getOffset(), declaration.getType().length()));
+
+		return f;
 	}
 
 }

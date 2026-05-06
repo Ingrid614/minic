@@ -76,7 +76,10 @@ public class First implements AccessibleExpression {
 	 */
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		throw new SemanticsUndefinedException("Semantics getCode undefined in First.");
+		Fragment f = _factory.createFragment();
+		f.append(this.target.getCode(_factory));
+		f.add(_factory.createPop(0, ((CoupleType) target.getType()).getSecond().length()));
+		return f;
 	}
 
 }

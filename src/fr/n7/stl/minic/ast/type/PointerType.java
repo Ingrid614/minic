@@ -29,7 +29,11 @@ public class PointerType implements Type {
 	 */
 	@Override
 	public boolean equalsTo(Type _other) {
-		throw new SemanticsUndefinedException("Semantics equalsTo undefined in PointerType.");
+		if (_other instanceof PointerType){
+			return this.element.equalsTo(((PointerType) _other).element);
+		}
+
+		return false;
 	}
 
 	/* (non-Javadoc)
@@ -37,7 +41,10 @@ public class PointerType implements Type {
 	 */
 	@Override
 	public boolean compatibleWith(Type _other) {
-		throw new SemanticsUndefinedException("Semantics compatibleWith undefined in PointerType.");
+		if(_other instanceof PointerType){
+			return this.element.compatibleWith(((PointerType) _other).element);
+		}
+		return false;
 	}
 
 	/* (non-Javadoc)
@@ -45,7 +52,14 @@ public class PointerType implements Type {
 	 */
 	@Override
 	public Type merge(Type _other) {
-		throw new SemanticsUndefinedException("Semantics merge undefined in PointerType.");
+		if(_other instanceof PointerType){
+			Type _elementMerge = this.element.merge(((PointerType) _other).element);
+			if (_elementMerge.equalsTo(AtomicType.ErrorType)){
+				return _elementMerge;
+			}
+			return new PointerType(_elementMerge);
+		}
+		return AtomicType.ErrorType;
 	}
 
 	/* (non-Javadoc)
@@ -53,7 +67,7 @@ public class PointerType implements Type {
 	 */
 	@Override
 	public int length() {
-		throw new SemanticsUndefinedException("Semantics length undefined in PointerType.");
+		return 1;
 	}
 
 	/* (non-Javadoc)

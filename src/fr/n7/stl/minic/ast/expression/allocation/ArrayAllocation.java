@@ -9,8 +9,10 @@ import fr.n7.stl.minic.ast.expression.accessible.AccessibleExpression;
 import fr.n7.stl.minic.ast.expression.assignable.AssignableExpression;
 import fr.n7.stl.minic.ast.scope.Declaration;
 import fr.n7.stl.minic.ast.scope.HierarchicalScope;
+import fr.n7.stl.minic.ast.type.ArrayType;
 import fr.n7.stl.minic.ast.type.Type;
 import fr.n7.stl.tam.ast.Fragment;
+import fr.n7.stl.tam.ast.Library;
 import fr.n7.stl.tam.ast.TAMFactory;
 
 /**
@@ -40,7 +42,7 @@ public class ArrayAllocation implements AccessibleExpression, AssignableExpressi
 	 */
 	@Override
 	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException( "Semantics collect is undefined in ArrayAllocation.");
+		return this.size.collectAndPartialResolve(_scope);
 	}
 	
 	/* (non-Javadoc)
@@ -48,7 +50,7 @@ public class ArrayAllocation implements AccessibleExpression, AssignableExpressi
 	 */
 	@Override
 	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException( "Semantics resolve is undefined in ArrayAllocation.");
+		return this.size.completeResolve(_scope) && this.element.completeResolve(_scope);
 	}
 
 	/* (non-Javadoc)
@@ -56,7 +58,7 @@ public class ArrayAllocation implements AccessibleExpression, AssignableExpressi
 	 */
 	@Override
 	public Type getType() {
-		throw new SemanticsUndefinedException( "Semantics getType is undefined in ArrayAllocation.");
+		return new ArrayType(this.element);
 	}
 
 	/* (non-Javadoc)
@@ -64,7 +66,12 @@ public class ArrayAllocation implements AccessibleExpression, AssignableExpressi
 	 */
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		throw new SemanticsUndefinedException( "Semantics getCode is undefined in ArrayAllocation.");
+		Fragment f = _factory.createFragment();
+		f.append(this.size.getCode(_factory));
+		f.add(_factory.createLoadL(this.element.length()));
+		f.add(Library.IMul);
+		f.add(Library.MAlloc);
+		return f;
 	}
 
 }

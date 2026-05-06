@@ -9,8 +9,10 @@ import fr.n7.stl.minic.ast.expression.accessible.AccessibleExpression;
 import fr.n7.stl.minic.ast.expression.assignable.AssignableExpression;
 import fr.n7.stl.minic.ast.scope.Declaration;
 import fr.n7.stl.minic.ast.scope.HierarchicalScope;
+import fr.n7.stl.minic.ast.type.PointerType;
 import fr.n7.stl.minic.ast.type.Type;
 import fr.n7.stl.tam.ast.Fragment;
+import fr.n7.stl.tam.ast.Library;
 import fr.n7.stl.tam.ast.TAMFactory;
 
 /**
@@ -38,7 +40,7 @@ public class PointerAllocation implements AccessibleExpression, AssignableExpres
 	 */
 	@Override
 	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException( "Semantics collect is undefined in PointerAllocation.");
+		return true;
 	}
 
 	/* (non-Javadoc)
@@ -46,7 +48,7 @@ public class PointerAllocation implements AccessibleExpression, AssignableExpres
 	 */
 	@Override
 	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException( "Semantics resolve is undefined in PointerAllocation.");
+		return this.element.completeResolve(_scope);
 	}
 
 	/* (non-Javadoc)
@@ -54,7 +56,7 @@ public class PointerAllocation implements AccessibleExpression, AssignableExpres
 	 */
 	@Override
 	public Type getType() {
-		throw new SemanticsUndefinedException( "Semantics getType is undefined in PointerAllocation.");
+		return new PointerType(this.element);
 	}
 
 	/* (non-Javadoc)
@@ -62,7 +64,11 @@ public class PointerAllocation implements AccessibleExpression, AssignableExpres
 	 */
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		throw new SemanticsUndefinedException( "Semantics getCode is undefined in PointerAllocation.");
+		Fragment f = _factory.createFragment();
+		f.add(_factory.createLoadL(this.element.length()));
+		f.add(Library.MAlloc);
+		return f;
+	
 	}
 
 }

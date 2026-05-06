@@ -9,6 +9,7 @@ import fr.n7.stl.minic.ast.SemanticsUndefinedException;
 import fr.n7.stl.minic.ast.expression.Expression;
 import fr.n7.stl.minic.ast.scope.Declaration;
 import fr.n7.stl.minic.ast.instruction.declaration.FunctionDeclaration;
+import fr.n7.stl.minic.ast.instruction.declaration.ParameterDeclaration;
 import fr.n7.stl.minic.ast.scope.HierarchicalScope;
 import fr.n7.stl.minic.ast.type.Type;
 import fr.n7.stl.tam.ast.Fragment;
@@ -95,7 +96,26 @@ public class Return implements Instruction {
 	 */
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		throw new SemanticsUndefinedException("Semantics getCode undefined in Return.");
+		Fragment fragment = _factory.createFragment();
+
+		// Génération de la valeur de retour
+		fragment.append(this.value.getCode(_factory));
+
+		// Taille totale des paramètres
+		int parametersSize = 0;
+
+		for (ParameterDeclaration parameter : this.function.getParameters()) {
+			parametersSize += parameter.getType().length();
+		}
+
+		// RETURN(resultSize, parametersSize)
+		fragment.add(
+			_factory.createReturn(
+				this.value.getType().length(),
+				parametersSize
+			)
+		);
+		return fragment;
 	}
 
 }

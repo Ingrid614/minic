@@ -133,7 +133,7 @@ public class ConstantDeclaration implements DeclarationInstruction {
 	 */
 	@Override
 	public int allocateMemory(Register _register, int _offset) {
-		return this.type.length();
+		return 0; // Pour les constantes, on remplace direct dans la génération de code, pas d'allocation mémoire
 	}
 
 	/* (non-Javadoc)
@@ -141,7 +141,7 @@ public class ConstantDeclaration implements DeclarationInstruction {
 	 */
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		throw new SemanticsUndefinedException( "Semantics getCode is undefined in ConstantDeclaration.");
+		return _factory.createFragment();
 	}
 
 }

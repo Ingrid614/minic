@@ -77,7 +77,27 @@ public class Second implements AccessibleExpression {
 	 */
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		throw new SemanticsUndefinedException("Semantics getCode undefined in Second.");
+
+		Fragment fragment = _factory.createFragment();
+
+		CoupleType couple =
+			(CoupleType) this.target.getType();
+
+		// Empile le couple
+		fragment.append(
+			this.target.getCode(_factory)
+		);
+
+		// Garde le second élément
+		// Supprime le premier
+		fragment.add(
+			_factory.createPop(
+				couple.getSecond().length(),
+				couple.getFirst().length()
+			)
+		);
+
+		return fragment;
 	}
 
 }

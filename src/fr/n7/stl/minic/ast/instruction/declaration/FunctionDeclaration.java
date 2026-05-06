@@ -184,7 +184,9 @@ public class FunctionDeclaration implements DeclarationInstruction {
 	 */
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		throw new SemanticsUndefinedException( "Semantics getCode is undefined in FunctionDeclaration.");
+
+		Fragment f = body.getCode(_factory);
+		return f;
 	}
 
 }

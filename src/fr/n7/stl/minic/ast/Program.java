@@ -132,7 +132,23 @@ public class Program {
 	 * @return Synthesized AST for the generated TAM code.
 	 */
 	public Fragment getCode(TAMFactory _factory) {
-		throw new SemanticsUndefinedException("Semantics generateCode is undefined in Program.");
+		Fragment fragment = _factory.createFragment();
+
+		// Code du programme principal
+		fragment.append(this.main.getCode(_factory));
+
+		// Fin du programme
+		fragment.add(_factory.createHalt());
+
+		// Code des fonctions
+		for (DeclarationInstruction declaration : this.declarations) {
+
+			if (declaration instanceof FunctionDeclaration) {
+				fragment.append(declaration.getCode(_factory));
+			}
+		}
+
+		return fragment;
 	}
 
 }

@@ -34,15 +34,26 @@ public class FunctionType implements Type {
 	 */
 	@Override
 	public boolean equalsTo(Type _other) {
-		throw new SemanticsUndefinedException( "equalsTo is undefined in FunctionType.");
+		if(_other instanceof FunctionType){
+			if(!this.result.equalsTo(((FunctionType) _other).result )){
+				return false;
+			}
+			if (this.parameters.size() != ((FunctionType) _other).parameters.size()){
+				return false;
+			}
+			for (int i = 0; i < this.parameters.size(); i++) {
+            if (!this.parameters.get(i).equalsTo(((FunctionType) _other).parameters.get(i))) {
+                return false;
+            }
+        } return true;
+		} return false;
 	}
-
 	/* (non-Javadoc)
 	 * @see fr.n7.stl.block.ast.Type#compatibleWith(fr.n7.stl.block.ast.Type)
 	 */
 	@Override
 	public boolean compatibleWith(Type _other) {
-		throw new SemanticsUndefinedException( "compatibleWith is undefined in FunctionType.");
+		return this.equalsTo(_other);
 	}
 
 	/* (non-Javadoc)
@@ -50,7 +61,9 @@ public class FunctionType implements Type {
 	 */
 	@Override
 	public Type merge(Type _other) {
-		throw new SemanticsUndefinedException( "merge is undefined in FunctionType.");
+		if (this.compatibleWith(_other)){
+			return this;
+		} return AtomicType.ErrorType;
 	}
 
 	/* (non-Javadoc)
@@ -58,7 +71,7 @@ public class FunctionType implements Type {
 	 */
 	@Override
 	public int length() {
-		throw new SemanticsUndefinedException("Semantics length is undefined in FunctionType.");
+		return 1;
 	}
 
 	/* (non-Javadoc)
@@ -82,7 +95,10 @@ public class FunctionType implements Type {
 	 */
 	@Override
 	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException("Semantics resolve is undefined in FunctionType.");
+		boolean res = true;
+		for(Type type : parameters){
+			res = res && type.completeResolve(_scope);
+		} return res && result.completeResolve(_scope);
 	}
 
 }

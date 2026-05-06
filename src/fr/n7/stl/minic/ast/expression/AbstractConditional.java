@@ -96,7 +96,44 @@ public class AbstractConditional<ExpressionKind extends Expression> implements E
 	 */
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		throw new SemanticsUndefinedException( "Semantics getCode is undefined in ConditionalExpression.");
+
+		Fragment fragment = _factory.createFragment();
+
+		String elseLabel =
+			"else_expr_" + _factory.createLabelNumber();
+
+		String endLabel =
+			"end_expr_" + _factory.createLabelNumber();
+
+		// Évaluation de la condition
+		fragment.append(this.condition.getCode(_factory));
+
+		// Si faux -> else
+		fragment.add(
+			_factory.createJumpIf(elseLabel, 0)
+		);
+
+		// THEN
+		fragment.append(
+			this.thenExpression.getCode(_factory)
+		);
+
+		// Saut vers la fin
+		fragment.add(
+			_factory.createJump(endLabel)
+		);
+
+		// ELSE
+		fragment.addPrefix(elseLabel);
+
+		fragment.append(
+			this.elseExpression.getCode(_factory)
+		);
+
+		// FIN
+		fragment.addPrefix(endLabel);
+
+		return fragment;
 	}
 
 }

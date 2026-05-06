@@ -15,9 +15,11 @@ import fr.n7.stl.minic.ast.type.Type;
 public class LabelDeclaration implements Declaration {
 
 	private String name;
+	private Type type;
 
-	public LabelDeclaration(String _name) {
+	public LabelDeclaration(String _name, Type _type) {
 		this.name = _name;
+		this.type = _type;
 	}
 
 	/* (non-Javadoc)
@@ -30,7 +32,7 @@ public class LabelDeclaration implements Declaration {
 	
 	@Override
 	public Type getType() {
-		return AtomicType.VoidType; // TODO : Should be the type of the enum containing the label...
+		return this.type; // TODO : Should be the type of the enum containing the label...
 	}
 
 	/* (non-Javadoc)

@@ -4,8 +4,6 @@
 package fr.n7.stl.minic.ast.expression;
 
 import fr.n7.stl.minic.ast.SemanticsUndefinedException;
-import fr.n7.stl.minic.ast.expression.accessible.AccessibleExpression;
-import fr.n7.stl.minic.ast.expression.assignable.AssignableExpression;
 import fr.n7.stl.minic.ast.scope.Declaration;
 import fr.n7.stl.minic.ast.scope.HierarchicalScope;
 import fr.n7.stl.minic.ast.type.Type;
@@ -76,7 +74,23 @@ public abstract class AbstractConversion<TargetType> implements Expression {
 	 */
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		throw new SemanticsUndefinedException("Semantics getCode undefined in TypeConversion.");
+
+		Fragment fragment = _factory.createFragment();
+
+		if (this.target instanceof Expression) {
+
+			fragment.append(
+				((Expression) this.target).getCode(_factory)
+			);
+
+		} else {
+
+			throw new SemanticsUndefinedException(
+				"Conversion target is not an Expression."
+			);
+		}
+
+		return fragment;
 	}
 
 }

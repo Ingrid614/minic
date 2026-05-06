@@ -30,7 +30,7 @@ public class PointerAssignment extends AbstractPointer<AccessibleExpression> imp
 	 */
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		throw new SemanticsUndefinedException("Semantics getCode undefined in PointerAssignment.");
+		return this.pointer.getCode(_factory);
 	}
 	
 }

@@ -5,11 +5,14 @@ package fr.n7.stl.minic.ast.instruction.declaration;
 
 import fr.n7.stl.minic.ast.SemanticsUndefinedException;
 import fr.n7.stl.minic.ast.expression.Expression;
+import fr.n7.stl.minic.ast.expression.accessible.Sequence;
 import fr.n7.stl.minic.ast.instruction.Instruction;
 import fr.n7.stl.minic.ast.scope.Declaration;
 import fr.n7.stl.minic.ast.scope.HierarchicalScope;
+import fr.n7.stl.minic.ast.type.ArrayType;
 import fr.n7.stl.minic.ast.type.Type;
 import fr.n7.stl.tam.ast.Fragment;
+import fr.n7.stl.tam.ast.Library;
 import fr.n7.stl.tam.ast.Register;
 import fr.n7.stl.tam.ast.TAMFactory;
 import fr.n7.stl.util.Logger;
@@ -164,9 +167,25 @@ public class VariableDeclaration implements DeclarationInstruction {
 	/* (non-Javadoc)
 	 * @see fr.n7.stl.block.ast.Instruction#getCode(fr.n7.stl.tam.ast.TAMFactory)
 	 */
-	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		throw new SemanticsUndefinedException("Semantics getCode is undefined in VariableDeclaration.");
+		Fragment f = _factory.createFragment();
+		if(value instanceof Sequence && this.type instanceof ArrayType) {
+			f.add(_factory.createPush(1));
+			f.add(_factory.createLoadL(value.getType().length()));
+			f.add(_factory.createLoadL(((ArrayType) this.type).getType().length()));
+			f.add(Library.IMul);
+			f.add(Library.MAlloc);
+			f.add(_factory.createStore(register, offset,1));
+			f.append(value.getCode(_factory));
+			f.add(_factory.createLoad(register, offset,1));
+			f.add(_factory.createStoreI(value.getType().length()));
+		}
+		else {
+			f.add(_factory.createPush(value.getType().length()));
+			f.append(value.getCode(_factory));
+			f.add(_factory.createStore(register, offset,value.getType().length()));
+		}
+		return f; 
 	}
 
 }

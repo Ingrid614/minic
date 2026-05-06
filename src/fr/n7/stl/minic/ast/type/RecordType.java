@@ -68,16 +68,36 @@ public class RecordType implements Type, Declaration, Scope<FieldDeclaration> {
 	 * @see fr.n7.stl.block.ast.Type#equalsTo(fr.n7.stl.block.ast.Type)
 	 */
 	@Override
-	public boolean equalsTo(Type _other) {
-		throw new SemanticsUndefinedException( "compatibleWith is undefined in RecordType.");
-	}
+public boolean equalsTo(Type _other) {
+    if (_other instanceof RecordType) {
+        RecordType res = (RecordType) _other;
 
+        if (!this.name.equals(res.getName())) {
+            return false;
+        }
+
+        if (this.fields.size() != res.fields.size()) {
+            return false;
+        }
+
+        for (int i = 0; i < this.fields.size(); i++) {
+            FieldDeclaration f1 = this.fields.get(i);
+            FieldDeclaration f2 = res.fields.get(i);
+
+            if (!f1.getName().equals(f2.getName()) || !f1.getType().equalsTo(f2.getType())) {
+                return false;
+            }
+        }
+        return true;
+    }
+    return false;
+}
 	/* (non-Javadoc)
 	 * @see fr.n7.stl.block.ast.Type#compatibleWith(fr.n7.stl.block.ast.Type)
 	 */
 	@Override
 	public boolean compatibleWith(Type _other) {
-		throw new SemanticsUndefinedException( "compatibleWith is undefined in RecordType.");
+		return this.equalsTo(_other);
 	}
 
 	/* (non-Javadoc)
@@ -85,7 +105,9 @@ public class RecordType implements Type, Declaration, Scope<FieldDeclaration> {
 	 */
 	@Override
 	public Type merge(Type _other) {
-		throw new SemanticsUndefinedException( "compatibleWith is undefined in RecordType.");
+		if (this.compatibleWith(_other)){
+			return this;
+		} return AtomicType.ErrorType;
 	}
 
 	/* (non-Javadoc)

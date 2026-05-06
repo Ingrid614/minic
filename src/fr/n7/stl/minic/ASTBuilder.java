@@ -214,9 +214,9 @@ public class ASTBuilder extends MiniCParserBaseListener {
     @Override
     public void exitEtiquettes(EtiquettesContext ctx) {
         List<LabelDeclaration> listLabels = new LinkedList<>();
-        listLabels.add(new LabelDeclaration(ctx.premiere.getText()));
+        listLabels.add(new LabelDeclaration(ctx.premiere.getText(), AtomicType.IntegerType));
         for (Token lCtx : ctx.suite) {
-            listLabels.add(new LabelDeclaration(lCtx.getText()));
+            listLabels.add(new LabelDeclaration(lCtx.getText(), AtomicType.IntegerType));
         }
         ctx.lesEtiquettes = listLabels;
     }

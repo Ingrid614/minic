@@ -7,6 +7,7 @@ import fr.n7.stl.minic.ast.SemanticsUndefinedException;
 import fr.n7.stl.minic.ast.expression.AbstractArray;
 import fr.n7.stl.minic.ast.expression.Expression;
 import fr.n7.stl.tam.ast.Fragment;
+import fr.n7.stl.tam.ast.Library;
 import fr.n7.stl.tam.ast.TAMFactory;
 
 /**
@@ -30,7 +31,15 @@ public class ArrayAccess extends AbstractArray<AccessibleExpression> implements 
 	 */
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		throw new SemanticsUndefinedException( "getCode is undefined in ArrayAccess.");
+		Fragment f = _factory.createFragment();
+		f.append(array.getCode(_factory));
+		f.append(index.getCode(_factory));
+		int size = this.getType().length();
+		f.add(_factory.createLoadL(size));
+		f.add(Library.IMul);
+		f.add(Library.IAdd);
+
+		return f;
 	}
 
 }
