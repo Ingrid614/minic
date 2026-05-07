@@ -1,0 +1,7 @@
+void main() {
+    int value = 42;
+    int *p = &value;
+    print *p; // 42
+    *p = 10;
+    print value;  // 10
+}

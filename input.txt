@@ -1,26 +1,5 @@
-int function(int s,int t){
-    return s + t;
-}
-
+typedef struct Ponto { int x; int y; } Ponto;
 void main() {
-    int * p = new int();
-
-    int t[] = new int[10];
-    int i = 0;
-    int j = i;
-    <int,int> c = {1,3};
-    i = fst c;
-    i = function(fst c,snd c);
-    
-    if(i == 0){
-        j = i;
-    }
-    const int ki = 0;
-    i = 3;
-    while(i > 0){
-        i = i+1;
-    }
-    print "hello";
+    Ponto p = {1, 2};
+    print p.z; // ERRO: Campo 'z' não existe na struct Ponto
 }
-
-

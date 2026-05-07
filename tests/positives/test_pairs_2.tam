@@ -1,0 +1,84 @@
+PUSH 2
+LOADL 2
+LOADL 1
+STORE (2) 0[SB]
+PUSH 2
+LOADL 0
+LOADL 22
+STORE (2) 2[SB]
+PUSH 2
+LOADL 33
+LOADL 44
+STORE (2) 4[SB]
+;VariableAccess : v3
+LOAD (2) 4[SB]
+POP (0) 1
+SUBR IOut
+LOADL 10
+SUBR COut
+;VariableAccess : v3
+LOAD (2) 4[SB]
+POP (1) 1
+SUBR IOut
+LOADL 10
+SUBR COut
+PUSH 2
+;VariableAccess : v3
+LOAD (2) 4[SB]
+POP (0) 1
+;VariableAccess : v2
+LOAD (2) 2[SB]
+POP (1) 1
+STORE (2) 6[SB]
+;VariableAccess : v4
+LOAD (2) 6[SB]
+POP (0) 1
+SUBR IOut
+LOADL 10
+SUBR COut
+;VariableAccess : v4
+LOAD (2) 6[SB]
+POP (1) 1
+SUBR IOut
+LOADL 10
+SUBR COut
+PUSH 2
+;VariableAccess : v2
+LOAD (2) 2[SB]
+POP (0) 1
+;VariableAccess : v1
+LOAD (2) 0[SB]
+POP (1) 1
+STORE (2) 8[SB]
+;VariableAccess : v5
+LOAD (2) 8[SB]
+POP (0) 1
+SUBR BOut
+LOADL 10
+SUBR COut
+;VariableAccess : v5
+LOAD (2) 8[SB]
+POP (1) 1
+SUBR BOut
+LOADL 10
+SUBR COut
+LOADL 1
+LOADL 1
+; v5 
+LOADA 8[SB]
+STOREI (2)
+;VariableAccess : v5
+LOAD (2) 8[SB]
+POP (0) 1
+SUBR BOut
+LOADL 10
+SUBR COut
+;VariableAccess : v5
+LOAD (2) 8[SB]
+POP (1) 1
+SUBR BOut
+LOADL 10
+SUBR COut
+HALT
+HALT
+

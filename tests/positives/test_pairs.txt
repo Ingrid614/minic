@@ -1,0 +1,7 @@
+void main() {
+    <int, boolean> myPair = <10, true>;
+    print fst myPair; // 10
+    if (snd myPair) {
+        print 1; // 1
+    }
+}

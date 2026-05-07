@@ -1,0 +1,15 @@
+int sum(int a, int b) {
+    return a + b;
+}
+
+void main() {
+    int x = 10;
+    int counter = 0;
+    while (counter < 5) {
+        x = sum(x, 1);
+        counter = counter + 1;
+    }
+    if (x == 15) {
+        print x; // Should print 15
+    }
+}

@@ -1,0 +1,50 @@
+PUSH 1
+LOADL 10
+STORE (1) 0[SB]
+PUSH 1
+LOADL 0
+STORE (1) 1[SB]
+;VariableAccess : counter
+;(counter < 5)
+_debut_boucle_1
+_fin_boucle_2
+LOAD (1) 1[SB]
+LOADL 5
+SUBR ILss
+JUMPIF (0) _fin_boucle_2
+;VariableAccess : x
+LOAD (1) 0[SB]
+LOADL 1
+CALL (LB) sum
+; x 
+LOADA 0[SB]
+STOREI (1)
+;VariableAccess : counter
+;(counter + 1)
+LOAD (1) 1[SB]
+LOADL 1
+SUBR IAdd
+; counter 
+LOADA 1[SB]
+STOREI (1)
+JUMP _debut_boucle_1
+;VariableAccess : x
+;(x == 15)
+end_if_4
+LOAD (1) 0[SB]
+LOADL 15
+SUBR IEq
+JUMPIF (0) end_if_4
+;VariableAccess : x
+LOAD (1) 0[SB]
+SUBR IOut
+LOADL 10
+SUBR COut
+HALT
+;(a + b)
+LOAD (1) -1[LB]
+LOAD (1) -1[LB]
+SUBR IAdd
+RETURN (1) 2
+HALT
+

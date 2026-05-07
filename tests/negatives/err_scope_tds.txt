@@ -1,0 +1,6 @@
+void main() {
+    if (true) {
+        int temp = 10;
+    }
+    print temp; // ERROR: temp is not in scope here
+}

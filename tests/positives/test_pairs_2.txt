@@ -1,0 +1,20 @@
+void main() {
+    <int, boolean> v1 = <2, true>;
+    <boolean, int> v2 = <false, 22>;
+    <int, int> v3 = <33, 44>;
+    
+    print fst v3;
+    print snd v3;
+    
+    <int, int> v4 = <fst v3, snd v2>;
+    print fst v4;
+    print snd v4;
+    
+    <boolean, boolean> v5 = <fst v2, snd v1>;
+    print fst v5;
+    print snd v5;
+    
+    v5 = <true, true>;
+    print fst v5;
+    print snd v5;
+}

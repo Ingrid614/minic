@@ -1,0 +1,5 @@
+void main() {
+    int a = 10;
+    boolean b = true;
+    a = b; // ERROR: Cannot assign boolean to int
+}

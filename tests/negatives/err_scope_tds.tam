@@ -1,0 +1,14 @@
+end_if_2
+LOADL 1
+JUMPIF (0) end_if_2
+PUSH 1
+LOADL 10
+STORE (1) 0[SB]
+;VariableAccess : temp
+LOAD (1) 0[SB]
+SUBR IOut
+LOADL 10
+SUBR COut
+HALT
+HALT
+

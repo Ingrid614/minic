@@ -1,0 +1,26 @@
+void main() {
+    // Array allocation
+    int t[] = new int[5];
+    print t[0];
+    t[0] = 22;
+    t[4] = 44;
+
+    // Array initialization
+    int t2[] = {11, 22, 33, 44, 5};
+    t2[0] = t[0] + t[4];
+    t2[1] = t2[1] * t2[2];    
+    
+    // Array of pairs allocation
+    // Note: If this fails, try: pair<boolean, boolean> t_pair[] = ...
+    <boolean, boolean> t_pair[] = new <boolean, boolean>[5]; 
+    t_pair[0] = <true, false>; 
+    t_pair[1] = <false, false>; 
+    t_pair[2] = <false, false>; 
+    t_pair[3] = <true, true>; 
+    t_pair[4] = <true, false>; 
+
+    print t[0];
+    print t[4];
+    print t2[0];
+    print t2[4];
+}

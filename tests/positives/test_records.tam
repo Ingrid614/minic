@@ -1,0 +1,27 @@
+PUSH 2
+LOADL 10
+LOADL 20
+STORE (2) 0[SB]
+LOADL 100
+; p1 
+LOADA 0[SB]
+LOADL -1
+SUBR IAdd
+STOREI (1)
+;VariableAccess : p1
+LOAD (2) 0[SB]
+LOADL -1
+SUBR IAdd
+SUBR IOut
+LOADL 10
+SUBR COut
+;VariableAccess : p1
+LOAD (2) 0[SB]
+LOADL -1
+SUBR IAdd
+SUBR IOut
+LOADL 10
+SUBR COut
+HALT
+HALT
+
