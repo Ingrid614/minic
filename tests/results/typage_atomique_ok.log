@@ -1,0 +1,21 @@
+void main() {
+int a = 5;
+float b = 3.14;
+boolean c = true;
+String e = "hello";
+ a  = (a + 10);
+ b  = (b * 2.0);
+ c  = (! c);
+if (c ){
+ a  = 20;
+}
+while ((a > 10) ){
+ a  = (a - 1);
+}
+}
+
+collect succeeded
+Resolve succeeded.
+Type verification succeeded.
+Code generation ...
+Code generation finished

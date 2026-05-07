@@ -1,0 +1,25 @@
+void main() {
+    // Test des pointeurs
+    int a = 5;
+    int* ptr_a = &a;
+    
+    // Déréférencement
+    int b = *ptr_a;
+
+    // Affectation via pointeur
+    *ptr_a = 10;
+    
+    // Pointeur de pointeur
+    int** ptr_ptr_a = &ptr_a;
+    **ptr_ptr_a = 15;
+    
+    // Pointeurs et tableaux
+    int tab[] = new int[3];
+    tab[0] = 1;
+    tab[1] = 2;
+    tab[2] = 3;
+    
+    int* ptr_tab = &tab[0];
+   *ptr_tab = 42;      // tab[0] = 42
+    
+} 

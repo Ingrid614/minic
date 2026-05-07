@@ -1,0 +1,20 @@
+void main() {
+int a = 5;
+(int *) ptr_a = &  a ;
+int b = * ptr_a;
+(*ptr_a) = 10;
+((int *) *) ptr_ptr_a = &  ptr_a ;
+(** ptr_ptr_a) = 15;
+(int []) tab = new int[ 3 ];
+ tab [ 0 ] = 1;
+ tab [ 1 ] = 2;
+ tab [ 2 ] = 3;
+(int *) ptr_tab = &  tab [ 0 ];
+(*ptr_tab) = 42;
+}
+
+collect succeeded
+Resolve succeeded.
+Type verification succeeded.
+Code generation ...
+Code generation finished

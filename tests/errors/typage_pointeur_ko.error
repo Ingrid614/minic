@@ -1,0 +1,15 @@
+line 1:13 no viable alternative at input 'monProgramme{'
+line 16:10 no viable alternative at input 'ptr_a='
+line 19:20 mismatched input '+' expecting ')'
+line 19:22 extraneous input ')' expecting ';'
+line 24:4 extraneous input 'return' expecting {'const', 'typedef', 'struct', 'enum', '<', 'int', 'float', 'boolean', 'char', 'String', 'void', Identificateur}
+Exception in thread "main" java.lang.NullPointerException: Cannot read field "uneAffectable" because the return value of "fr.n7.stl.minic.parser.MiniCParser$AffectableConversionContext.affectable()" is null
+	at fr.n7.stl.minic.ASTBuilder.exitAffectableConversion(Unknown Source)
+	at fr.n7.stl.minic.parser.MiniCParser$AffectableConversionContext.exitRule(Unknown Source)
+	at org.antlr.v4.runtime.tree.ParseTreeWalker.exitRule(ParseTreeWalker.java:62)
+	at org.antlr.v4.runtime.tree.ParseTreeWalker.walk(ParseTreeWalker.java:38)
+	at org.antlr.v4.runtime.tree.ParseTreeWalker.walk(ParseTreeWalker.java:36)
+	at org.antlr.v4.runtime.tree.ParseTreeWalker.walk(ParseTreeWalker.java:36)
+	at org.antlr.v4.runtime.tree.ParseTreeWalker.walk(ParseTreeWalker.java:36)
+	at org.antlr.v4.runtime.tree.ParseTreeWalker.walk(ParseTreeWalker.java:36)
+	at fr.n7.stl.minic.Driver.main(Unknown Source)

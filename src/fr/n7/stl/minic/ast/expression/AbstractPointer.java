@@ -3,7 +3,10 @@ package fr.n7.stl.minic.ast.expression;
 import fr.n7.stl.minic.ast.SemanticsUndefinedException;
 import fr.n7.stl.minic.ast.scope.Declaration;
 import fr.n7.stl.minic.ast.scope.HierarchicalScope;
+import fr.n7.stl.minic.ast.type.AtomicType;
+import fr.n7.stl.minic.ast.type.PointerType;
 import fr.n7.stl.minic.ast.type.Type;
+import fr.n7.stl.util.Logger;
 
 /**
  * Common elements between left (Assignable) and right (Expression) end sides of assignments. These elements
@@ -54,8 +57,17 @@ public abstract class AbstractPointer<PointerKind extends Expression> implements
 	 * Synthesized Semantics attribute to compute the type of an expression.
 	 * @return Synthesized Type of the expression.
 	 */
+	@Override
 	public Type getType() {
-		return this.pointer.getType();
+
+		Type type = this.pointer.getType();
+
+		if (type instanceof PointerType) {
+			return ((PointerType) type).getPointedType();
+		}
+
+		Logger.error("Dereference on non-pointer type : " + type);
+		return AtomicType.ErrorType;
 	}
 
 }

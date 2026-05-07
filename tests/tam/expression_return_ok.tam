@@ -1,0 +1,33 @@
+PUSH 1
+LOADL 4
+LOADL 5
+CALL (LB) addition
+STORE (1) 0[SB]
+;VariableAccess : x
+LOAD (1) 0[SB]
+SUBR IOut
+LOADL 10
+SUBR COut
+PUSH 1
+;VariableAccess : x
+LOAD (1) 0[SB]
+CALL (LB) carre
+STORE (1) 1[SB]
+;VariableAccess : y
+LOAD (1) 1[SB]
+SUBR IOut
+LOADL 10
+SUBR COut
+HALT
+;(a + b)
+LOAD (1) -1[LB]
+LOAD (1) -1[LB]
+SUBR IAdd
+RETURN (1) 2
+;(x * x)
+LOAD (1) -1[LB]
+LOAD (1) -1[LB]
+SUBR IMul
+RETURN (1) 1
+HALT
+

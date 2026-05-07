@@ -1,0 +1,22 @@
+void main() {
+    // Test des types atomiques
+    int a = 5;
+    float b = 3.14;
+    boolean c = true;
+    String e = "hello";
+    
+    // Opérations compatibles
+    a = a + 10;
+    b = b * 2.0;
+    c = !c;
+    
+    // Test de conditions
+    if (c) {
+        a = 20;
+    }
+    
+    // Test de boucles avec condition booléenne
+    while (a > 10) {
+        a = a - 1;
+    }
+} 

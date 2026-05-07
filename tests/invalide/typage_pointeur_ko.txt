@@ -1,0 +1,25 @@
+monProgramme {
+    // Test des pointeurs avec erreurs
+    int a = 5;
+    float b = 3.14;
+    
+    // Erreur: types incompatibles
+    int* ptr_a = &b;     // Erreur: pointeur de int ne peut pas pointer sur un float
+    
+    // Erreur: déréférencement d'un non-pointeur
+    int c = *a;          // Erreur: a n'est pas un pointeur
+    
+    // Erreur: référence d'un pointeur
+    int* ptr_b = a;      // Erreur: a n'est pas une adresse
+    
+    // Erreur: opérations arithmétiques sur pointeurs
+    ptr_a = ptr_a + 1;   // Erreur: opération non supportée en MiniC
+    
+    // Erreur: pointage vers valeur temporaire
+    int* ptr_c = &(a+b); // Erreur: référence à une expression temporaire
+    
+    // Erreur: déréférencement multiple invalide
+    int d = **ptr_a;     // Erreur: ptr_a est un pointeur simple, pas un pointeur de pointeur
+    
+    return a;
+} 

@@ -1,0 +1,27 @@
+monProgramme {
+    // Erreurs avec les tableaux
+    int tab[3];
+    
+    // Erreur: indice non entier
+    tab[1.5] = 10;        // Erreur: l'indice doit être un entier
+    
+    // Erreur: affectation de type incompatible
+    tab[0] = true;        // Erreur: boolean incompatible avec int
+    
+    // Erreur: accès hors limites (pas détectable en typage statique mais bon à tester)
+    tab[5] = 20;          // Erreur: l'indice 5 est hors limites
+    
+    // Erreur: utilisation de tableau comme valeur
+    int a = tab;          // Erreur: tab est un tableau, pas une valeur
+    
+    // Erreur: opération invalide sur tableau
+    tab = tab + 1;        // Erreur: opération non définie pour les tableaux
+    
+    // Erreur: accès indexé sur non-tableau
+    int b = 5;
+    int c = b[0];         // Erreur: b n'est pas un tableau
+    
+   
+    
+    return 0;
+} 

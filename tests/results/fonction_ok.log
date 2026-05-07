@@ -1,0 +1,39 @@
+void afficherMessage(  ){
+print "Bonjour, MiniC!";
+}
+
+int addition( int x ,int y ){
+return (x + y);
+}
+
+int calcul( int n ){
+if ((n <= 1) ){
+return 1;
+}
+ else {
+return (n * (n - 1));
+}
+}
+
+typedef struct Point { int x; int y;} Point;
+
+Point creerPoint( int x ,int y ){
+Point p = { x ,y };
+return p;
+}
+
+void main() {
+void a = afficherMessage( );
+int resultat = addition( 5 ,7);
+int fact = calcul( 5);
+int somme = (resultat + fact);
+Point p1 = creerPoint( 3 ,4);
+print p1.x;
+print p1.y;
+}
+
+collect succeeded
+Resolve succeeded.
+Type verification succeeded.
+Code generation ...
+Code generation finished

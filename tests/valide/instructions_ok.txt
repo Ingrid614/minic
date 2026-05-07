@@ -1,0 +1,24 @@
+void main() {
+
+   int valeur = 45;
+   const boolean isValid = true;
+
+   valeur = 128;
+
+   if(valeur > 5){
+      valeur = 5;
+   } else {
+      valeur = -5;
+   }
+
+   int i = 0;
+   while(i < 100){
+      print i;
+      i = i + 1;
+   }
+
+   // char c = 'a';
+   float pi = 3.14;
+   String chaine = "SALUT";
+
+}

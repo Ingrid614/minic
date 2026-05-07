@@ -1,0 +1,21 @@
+void main() {
+(int []) tab = new int[ 5 ];
+ tab [ 0 ] = 10;
+ tab [ 1 ] = 20;
+ tab [ 2 ] = 30;
+ tab [ 3 ] = 40;
+ tab [ 4 ] = 50;
+int somme = ((((tab[ 0 ] + tab[ 1 ]) + tab[ 2 ]) + tab[ 3 ]) + tab[ 4 ]);
+(float []) tabFloat = new float[ 2 ];
+ tabFloat [ 0 ] = 1.5;
+ tabFloat [ 1 ] = 2.5;
+(boolean []) tabBool = new boolean[ 2 ];
+ tabBool [ 0 ] = true;
+ tabBool [ 1 ] = false;
+}
+
+collect succeeded
+Resolve succeeded.
+Type verification succeeded.
+Code generation ...
+Code generation finished

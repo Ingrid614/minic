@@ -67,8 +67,21 @@ public class Conditional implements Instruction {
 	 * @see fr.n7.stl.block.ast.instruction.Instruction#collect(fr.n7.stl.block.ast.scope.Scope)
 	 */
 	@Override
-	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope, FunctionDeclaration _container) {
-		return this.collectAndPartialResolve(_scope);
+	public boolean collectAndPartialResolve(
+			HierarchicalScope<Declaration> _scope,
+			FunctionDeclaration _container) {
+
+		boolean result = true;
+
+		result &= this.condition.collectAndPartialResolve(_scope);
+
+		result &= this.thenBranch.collectAndPartialResolve(_scope, _container);
+
+		if (this.elseBranch != null) {
+			result &= this.elseBranch.collectAndPartialResolve(_scope, _container);
+		}
+
+		return result;
 	}
 	
 	/* (non-Javadoc)

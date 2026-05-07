@@ -1,0 +1,60 @@
+PUSH 1
+LOADL 5
+STORE (1) 0[SB]
+PUSH 1
+STORE (1) 1[SB]
+PUSH 1
+LOADL 1
+STORE (1) 2[SB]
+PUSH 1
+STORE (1) 3[SB]
+;VariableAccess : a
+;(a + 10)
+LOAD (1) 0[SB]
+LOADL 10
+SUBR IAdd
+; a 
+LOADA 0[SB]
+STOREI (1)
+;VariableAccess : b
+;(b * 2.0)
+LOAD (1) 1[SB]
+SUBR IMul
+; b 
+LOADA 1[SB]
+STOREI (1)
+;VariableAccess : c
+;(! c)
+LOAD (1) 2[SB]
+SUBR BNeg
+; c 
+LOADA 2[SB]
+STOREI (1)
+;VariableAccess : c
+end_if_2
+LOAD (1) 2[SB]
+JUMPIF (0) end_if_2
+LOADL 20
+; a 
+LOADA 0[SB]
+STOREI (1)
+;VariableAccess : a
+;(a > 10)
+_debut_boucle_3
+_fin_boucle_4
+LOAD (1) 0[SB]
+LOADL 10
+SUBR IGtr
+JUMPIF (0) _fin_boucle_4
+;VariableAccess : a
+;(a - 1)
+LOAD (1) 0[SB]
+LOADL 1
+SUBR ISub
+; a 
+LOADA 0[SB]
+STOREI (1)
+JUMP _debut_boucle_3
+HALT
+HALT
+

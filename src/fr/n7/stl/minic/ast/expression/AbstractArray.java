@@ -4,7 +4,10 @@ import fr.n7.stl.minic.ast.SemanticsUndefinedException;
 import fr.n7.stl.minic.ast.expression.accessible.AccessibleExpression;
 import fr.n7.stl.minic.ast.scope.Declaration;
 import fr.n7.stl.minic.ast.scope.HierarchicalScope;
+import fr.n7.stl.minic.ast.type.ArrayType;
+import fr.n7.stl.minic.ast.type.AtomicType;
 import fr.n7.stl.minic.ast.type.Type;
+import fr.n7.stl.util.Logger;
 
 /**
  * Common elements between left (Assignable) and right (Expression) end sides of assignments. These elements
@@ -62,8 +65,17 @@ public abstract class AbstractArray<ArrayKind extends Expression> implements Exp
 	 * Synthesized Semantics attribute to compute the type of an expression.
 	 * @return Synthesized Type of the expression.
 	 */
+	@Override
 	public Type getType() {
-		return this.array.getType();
+
+		Type type = this.array.getType();
+
+		if (type instanceof ArrayType) {
+			return ((ArrayType) type).getType();
+		}
+
+		Logger.error("Access on non-array type : " + type);
+		return AtomicType.ErrorType;
 	}
 
 }

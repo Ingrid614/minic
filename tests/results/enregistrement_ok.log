@@ -1,0 +1,26 @@
+typedef struct Personne { int age; boolean majeur;} Personne;
+
+typedef struct Adresse { int numero; int codePostal;} Adresse;
+
+typedef struct Client { Personne infos; Adresse adresse;} Client;
+
+void main() {
+Personne p1 = { 21 ,true };
+Personne p2 = p1;
+print p2.age;
+ p2 .age = 17;
+ p2 .majeur = false;
+int a = p2.age;
+print a;
+Adresse a1 = { 12 ,75000 };
+Client c1 = { p1 ,a1 };
+int code = c1.adresse.codePostal;
+boolean adulte = c1.infos.majeur;
+print code;
+}
+
+collect succeeded
+Resolve succeeded.
+Type verification succeeded.
+Code generation ...
+Code generation finished

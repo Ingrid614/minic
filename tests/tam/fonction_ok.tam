@@ -1,0 +1,75 @@
+PUSH 0
+CALL (LB) afficherMessage
+STORE (0) 2[SB]
+PUSH 1
+LOADL 5
+LOADL 7
+CALL (LB) addition
+STORE (1) 2[SB]
+PUSH 1
+LOADL 5
+CALL (LB) calcul
+STORE (1) 3[SB]
+PUSH 1
+;VariableAccess : resultat
+;(resultat + fact)
+LOAD (1) 2[SB]
+;VariableAccess : fact
+LOAD (1) 3[SB]
+SUBR IAdd
+STORE (1) 4[SB]
+PUSH 2
+LOADL 3
+LOADL 4
+CALL (LB) creerPoint
+STORE (2) 5[SB]
+;VariableAccess : p1
+LOAD (2) 5[SB]
+LOADL -1
+SUBR IAdd
+SUBR IOut
+LOADL 10
+SUBR COut
+;VariableAccess : p1
+LOAD (2) 5[SB]
+LOADL -1
+SUBR IAdd
+SUBR IOut
+LOADL 10
+SUBR COut
+HALT
+SUBR SOut
+LOADL 10
+SUBR COut
+;(x + y)
+LOAD (1) -1[LB]
+LOAD (1) -1[LB]
+SUBR IAdd
+RETURN (1) 2
+;(n <= 1)
+else_1
+end_if_2
+LOAD (1) -1[LB]
+LOADL 1
+SUBR ILeq
+JUMPIF (0) else_1
+LOADL 1
+RETURN (1) 1
+JUMP end_if_2
+;(n * (n - 1))
+LOAD (1) -1[LB]
+;(n - 1)
+LOAD (1) -1[LB]
+LOADL 1
+SUBR ISub
+SUBR IMul
+RETURN (1) 1
+PUSH 2
+LOAD (1) -1[LB]
+LOAD (1) -1[LB]
+STORE (2) 0[SB]
+;VariableAccess : p
+LOAD (2) 0[SB]
+RETURN (2) 2
+HALT
+

@@ -1,0 +1,11 @@
+void main() {
+< int, int> c = { 1 ,2 };
+int firstVal = (fstc);
+int secondVal = (sndc);
+}
+
+collect succeeded
+Resolve succeeded.
+Type verification succeeded.
+Code generation ...
+Code generation finished

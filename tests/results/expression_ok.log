@@ -1,0 +1,19 @@
+void main() {
+int a = 1;
+int b = 3;
+int c = a;
+int d = (a + b);
+int e = (b - a);
+int f = (a * b);
+int g = (b / a);
+int h = (b % a);
+boolean x = (a < b);
+boolean y = (b >= a);
+boolean z = ((a + 1) == b);
+}
+
+collect succeeded
+Resolve succeeded.
+Type verification succeeded.
+Code generation ...
+Code generation finished

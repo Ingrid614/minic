@@ -1,0 +1,36 @@
+void afficherMessage() {
+    print "Bonjour, MiniC!";
+}
+int addition(int x, int y) {
+    return x + y;
+}
+int calcul(int n) {
+    if (n <= 1) {
+        return 1;
+    } else {
+        return n * (n - 1);
+    }
+}
+// Fonction imbriquée avec des structures
+typedef struct Point {
+    int x;
+    int y;
+} Point;
+
+Point creerPoint(int x, int y) {
+    Point p = {x, y};
+    return p;
+}
+void main() {
+    // Appel de fonctions
+    void a = afficherMessage(); // Appel d'une fonction sans retour
+    int resultat = addition(5, 7); // Appel d'une fonction avec retour
+    int fact = calcul(5); // Calcul sur 5
+
+    // Utilisation du résultat d'une fonction dans une expression
+    int somme = resultat + fact;
+
+    Point p1 = creerPoint(3, 4);
+    print p1.x; // Affichage d'un champ du point
+    print p1.y;
+}
