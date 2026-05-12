@@ -1,0 +1,15 @@
+void main() {
+int i = (1 + j);
+}
+
+collect succeeded
+Error : The identifier j has not been found.
+Exception in thread "main" fr.n7.stl.util.BlockSemanticsError
+	at fr.n7.stl.util.Logger.error(Unknown Source)
+	at fr.n7.stl.minic.ast.expression.accessible.IdentifierAccess.completeResolve(Unknown Source)
+	at fr.n7.stl.minic.ast.expression.accessible.BinaryExpression.completeResolve(Unknown Source)
+	at fr.n7.stl.minic.ast.instruction.declaration.VariableDeclaration.completeResolve(Unknown Source)
+	at fr.n7.stl.minic.ast.Block.completeResolve(Unknown Source)
+	at fr.n7.stl.minic.ast.Program.completeResolve(Unknown Source)
+	at fr.n7.stl.minic.ASTBuilder.startCompilation(Unknown Source)
+	at fr.n7.stl.minic.Driver.main(Unknown Source)

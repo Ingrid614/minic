@@ -1,0 +1,15 @@
+void main() {
+struct P { int x; int y;} p = { 1 ,2 };
+boolean a = p.x;
+}
+
+collect succeeded
+Resolve succeeded.
+Error : Type mismatch : cannot convert boolean to int
+Exception in thread "main" fr.n7.stl.util.BlockSemanticsError
+	at fr.n7.stl.util.Logger.error(Unknown Source)
+	at fr.n7.stl.minic.ast.instruction.declaration.VariableDeclaration.checkType(Unknown Source)
+	at fr.n7.stl.minic.ast.Block.checkType(Unknown Source)
+	at fr.n7.stl.minic.ast.Program.checkType(Unknown Source)
+	at fr.n7.stl.minic.ASTBuilder.startCompilation(Unknown Source)
+	at fr.n7.stl.minic.Driver.main(Unknown Source)

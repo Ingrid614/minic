@@ -1,0 +1,15 @@
+// Erreur attendue : le type P est déjà déclaré
+
+typedef struct P {
+    int x;
+    int y;
+} P;
+
+typedef struct P {
+    int x;
+    int y;
+} P;
+
+void main() {
+
+}

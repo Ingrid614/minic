@@ -1,0 +1,6 @@
+void main() {
+   // Erreur de type : utilisation d'une variable non bouléenne dans une condition.
+   int i = 1 ;
+   if (i) {
+   }
+}

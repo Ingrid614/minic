@@ -1,0 +1,12 @@
+// Erreur attendue : incompatibilité de type dans l'initialisation du record
+
+typedef struct P {
+    int x;
+    int y;
+} P;
+
+void main() {
+
+    P p = {1, true};
+
+}

@@ -1,0 +1,18 @@
+void main() {
+int i = 1;
+while (true ){
+int i = 1;
+}
+boolean i = true;
+}
+
+Error : Variable : i is already defined.
+Exception in thread "main" fr.n7.stl.util.BlockSemanticsError
+	at fr.n7.stl.util.Logger.error(Unknown Source)
+	at fr.n7.stl.minic.ast.instruction.declaration.VariableDeclaration.collectAndPartialResolve(Unknown Source)
+	at fr.n7.stl.minic.ast.Block.collectAndPartialResolve(Unknown Source)
+	at fr.n7.stl.minic.ast.instruction.Iteration.collectAndPartialResolve(Unknown Source)
+	at fr.n7.stl.minic.ast.Block.collectAndPartialResolve(Unknown Source)
+	at fr.n7.stl.minic.ast.Program.collectAndPartialResolve(Unknown Source)
+	at fr.n7.stl.minic.ASTBuilder.startCompilation(Unknown Source)
+	at fr.n7.stl.minic.Driver.main(Unknown Source)

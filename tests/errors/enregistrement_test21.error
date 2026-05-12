@@ -1,0 +1,14 @@
+typedef struct P { int x; int y;} P;
+
+typedef struct P { int x; int y;} P;
+
+void main() {
+}
+
+Error : Type : P is already defined.
+Exception in thread "main" fr.n7.stl.util.BlockSemanticsError
+	at fr.n7.stl.util.Logger.error(Unknown Source)
+	at fr.n7.stl.minic.ast.instruction.declaration.TypeDeclaration.collectAndPartialResolve(Unknown Source)
+	at fr.n7.stl.minic.ast.Program.collectAndPartialResolve(Unknown Source)
+	at fr.n7.stl.minic.ASTBuilder.startCompilation(Unknown Source)
+	at fr.n7.stl.minic.Driver.main(Unknown Source)

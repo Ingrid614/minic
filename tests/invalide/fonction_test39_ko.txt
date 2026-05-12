@@ -1,0 +1,42 @@
+
+
+int somme(int a, int b) {
+    return a + b;
+}
+    
+float calculer(float x, float y) {
+    return x * y;
+}
+// Erreur: redéfinition de fonction
+    int somme(float a, float b) { // Erreur: redéfinition de somme avec signature différente
+        return a + b;
+    }
+    
+    // Erreur: type de retour incorrect dans le corps de la fonction
+    int fonctionInvalide(int x) {
+        return true;              // Erreur: type de retour incompatible avec int
+    }
+    
+    // Erreur: pas de retour dans une fonction non void
+    int sansRetour(int x) {
+        x = x + 1;
+        // Pas de return
+    }
+void main() {
+    
+    // Erreur: appel avec un nombre incorrect de paramètres
+    int res1 = somme(5);          // Erreur: nombre incorrect de paramètres
+    int res2 = somme(5, 10, 15);  // Erreur: nombre incorrect de paramètres
+    
+    // Erreur: appel avec des types incompatibles
+    float res3 = somme(2.5, 3.5); // Erreur: les paramètres devraient être des int
+    
+    // Erreur: type de retour incompatible
+    boolean res4 = somme(5, 10);  // Erreur: int n'est pas compatible avec boolean
+    
+    // Erreur: fonction non définie
+    int res5 = nonDefinie(5);     // Erreur: la fonction nonDefinie n'existe pas
+    
+    
+    
+} 

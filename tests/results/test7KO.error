@@ -1,8 +1,0 @@
-line 1:6 no viable alternative at input 'facto{'
-line 12:2 extraneous input 'print' expecting {'const', 'typedef', 'struct', 'enum', '<', 'int', 'float', 'boolean', 'char', 'String', 'void', Identificateur}
-Exception in thread "main" java.lang.NullPointerException: Cannot read field "unBloc" because "<parameter1>.main" is null
-	at fr.n7.stl.minic.ASTBuilder.exitDeclarationProgramme(Unknown Source)
-	at fr.n7.stl.minic.parser.MiniCParser$DeclarationProgrammeContext.exitRule(Unknown Source)
-	at org.antlr.v4.runtime.tree.ParseTreeWalker.exitRule(ParseTreeWalker.java:62)
-	at org.antlr.v4.runtime.tree.ParseTreeWalker.walk(ParseTreeWalker.java:38)
-	at fr.n7.stl.minic.Driver.main(Unknown Source)

@@ -1,0 +1,6 @@
+void main() {
+   // extraction du premier élément de la paire dans une condition de répétition
+   <int,boolean> p =  { 1, false } ;
+   while (fst p) {
+   }
+}

@@ -1,0 +1,35 @@
+int somme( int a ,int b ){
+return (a + b);
+}
+
+float calculer( float x ,float y ){
+return (x * y);
+}
+
+int somme( float a ,float b ){
+return (a + b);
+}
+
+int fonctionInvalide( int x ){
+return true;
+}
+
+int sansRetour( int x ){
+ x  = (x + 1);
+}
+
+void main() {
+int res1 = somme( 5);
+int res2 = somme( 5 ,10 ,15);
+float res3 = somme( 2.5 ,3.5);
+boolean res4 = somme( 5 ,10);
+int res5 = nonDefinie( 5);
+}
+
+Error : Function : somme is already defined
+Exception in thread "main" fr.n7.stl.util.BlockSemanticsError
+	at fr.n7.stl.util.Logger.error(Unknown Source)
+	at fr.n7.stl.minic.ast.instruction.declaration.FunctionDeclaration.collectAndPartialResolve(Unknown Source)
+	at fr.n7.stl.minic.ast.Program.collectAndPartialResolve(Unknown Source)
+	at fr.n7.stl.minic.ASTBuilder.startCompilation(Unknown Source)
+	at fr.n7.stl.minic.Driver.main(Unknown Source)

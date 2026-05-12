@@ -1,0 +1,15 @@
+void main() {
+(int []) p = new int[ 2 ];
+ p [ 0 ] = true;
+}
+
+collect succeeded
+Resolve succeeded.
+Error : Type mismatch : cannot convert int to boolean
+Exception in thread "main" fr.n7.stl.util.BlockSemanticsError
+	at fr.n7.stl.util.Logger.error(Unknown Source)
+	at fr.n7.stl.minic.ast.instruction.Assignment.checkType(Unknown Source)
+	at fr.n7.stl.minic.ast.Block.checkType(Unknown Source)
+	at fr.n7.stl.minic.ast.Program.checkType(Unknown Source)
+	at fr.n7.stl.minic.ASTBuilder.startCompilation(Unknown Source)
+	at fr.n7.stl.minic.Driver.main(Unknown Source)

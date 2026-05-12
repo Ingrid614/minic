@@ -1,0 +1,19 @@
+void main() {
+int a = 5;
+float b = 3.14;
+(int *) ptr_a = &  b ;
+int c = * a;
+(int *) ptr_b = a;
+ ptr_a  = (ptr_a + 1);
+}
+
+collect succeeded
+Resolve succeeded.
+Error : Type mismatch : cannot convert (int *) to (float *)
+Exception in thread "main" fr.n7.stl.util.BlockSemanticsError
+	at fr.n7.stl.util.Logger.error(Unknown Source)
+	at fr.n7.stl.minic.ast.instruction.declaration.VariableDeclaration.checkType(Unknown Source)
+	at fr.n7.stl.minic.ast.Block.checkType(Unknown Source)
+	at fr.n7.stl.minic.ast.Program.checkType(Unknown Source)
+	at fr.n7.stl.minic.ASTBuilder.startCompilation(Unknown Source)
+	at fr.n7.stl.minic.Driver.main(Unknown Source)

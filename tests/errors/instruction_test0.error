@@ -1,0 +1,13 @@
+void main() {
+ i  = 1;
+}
+
+Error : The identifier i has not been found.
+Exception in thread "main" fr.n7.stl.util.BlockSemanticsError
+	at fr.n7.stl.util.Logger.error(Unknown Source)
+	at fr.n7.stl.minic.ast.expression.assignable.VariableAssignment.collectAndPartialResolve(Unknown Source)
+	at fr.n7.stl.minic.ast.instruction.Assignment.collectAndPartialResolve(Unknown Source)
+	at fr.n7.stl.minic.ast.Block.collectAndPartialResolve(Unknown Source)
+	at fr.n7.stl.minic.ast.Program.collectAndPartialResolve(Unknown Source)
+	at fr.n7.stl.minic.ASTBuilder.startCompilation(Unknown Source)
+	at fr.n7.stl.minic.Driver.main(Unknown Source)
